@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E0A5AE991D03D50800E4337E"
-               BuildableName = "WeatherForeCast.Swift.app"
-               BlueprintName = "WeatherForeCast.Swift"
-               ReferencedContainer = "container:WeatherForeCast.Swift.xcodeproj">
+               BuildableName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.app"
+               BlueprintName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift"
+               ReferencedContainer = "container:&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E0A5AE991D03D50800E4337E"
-            BuildableName = "WeatherForeCast.Swift.app"
-            BlueprintName = "WeatherForeCast.Swift"
-            ReferencedContainer = "container:WeatherForeCast.Swift.xcodeproj">
+            BuildableName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.app"
+            BlueprintName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift"
+            ReferencedContainer = "container:&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E0A5AE991D03D50800E4337E"
-            BuildableName = "WeatherForeCast.Swift.app"
-            BlueprintName = "WeatherForeCast.Swift"
-            ReferencedContainer = "container:WeatherForeCast.Swift.xcodeproj">
+            BuildableName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.app"
+            BlueprintName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift"
+            ReferencedContainer = "container:&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E0A5AE991D03D50800E4337E"
-            BuildableName = "WeatherForeCast.Swift.app"
-            BlueprintName = "WeatherForeCast.Swift"
-            ReferencedContainer = "container:WeatherForeCast.Swift.xcodeproj">
+            BuildableName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.app"
+            BlueprintName = "&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift"
+            ReferencedContainer = "container:&#x5929;&#x6c14;&#x9884;&#x62a5;.Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
