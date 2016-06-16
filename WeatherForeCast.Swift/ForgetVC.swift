@@ -12,7 +12,7 @@ class ForgetVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title  = "重设密码"
         // Do any additional setup after loading the view.
     }
 

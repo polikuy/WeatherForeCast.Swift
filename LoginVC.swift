@@ -9,16 +9,16 @@
 import UIKit
 
 class LoginVC: UIViewController {
-    @IBOutlet var headimageBtn: UIButton!
-    @IBOutlet var nameTextF: UITextField!
+    
+    @IBOutlet var telTextF: UITextField!
     @IBOutlet var passwordTextF: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title  = "登录"
         // Do any additional setup after loading the view.
     }
-
+    
     
     
     
@@ -37,7 +37,7 @@ class LoginVC: UIViewController {
         
         let vc  = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterVC")
         self.navigationController?.pushViewController(vc!, animated: true)
-
+        
     }
     
     //MARK：忘记密码按钮
@@ -51,13 +51,13 @@ class LoginVC: UIViewController {
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

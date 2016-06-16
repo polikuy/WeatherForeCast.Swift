@@ -12,7 +12,7 @@ class RegisterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       self.navigationItem.title  = "注册"
         // Do any additional setup after loading the view.
     }
 

@@ -49,7 +49,7 @@ class HomePageVC: UIViewController
         
         let  temp_str = noti.userInfo!["Status"]!
         if temp_str as! String == "Online (WiFi)" {
-            tip("已连接网络，当前网络为WIFI")
+            print("已连接网络，当前网络为WIFI")
         } else if temp_str as! String == "Online (WWAN)"{
             tip("已连接网络，当前网络为3G")
         }else {
@@ -63,11 +63,18 @@ class HomePageVC: UIViewController
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC")
         self.navigationController?.pushViewController(vc!, animated: true)
+
+    }
+    
+    //MARK:收藏列表按钮
+    @IBAction func collectListBtn(sender: AnyObject) {
         
-        
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CollectListTBV")
+        self.navigationController?.pushViewController(vc!, animated: true)
         
         
     }
+    
     //MARK:搜索按钮
     @IBAction func searchBtnClick(sender: AnyObject) {
         
