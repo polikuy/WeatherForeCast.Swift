@@ -25,12 +25,7 @@ class RegisterManager: NSObject {
 }
 //查询信息
 func searchTel(tel:String,handler:(success:Bool)->(String)) {
-    if tel == "" {
-        
-        let result = handler(success: false)
-        print("电话不能为空:\(result)")
-    }else {
-        
+    
         let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         managedContext = appdelegate?.managedObjectContext
         
@@ -59,7 +54,7 @@ func searchTel(tel:String,handler:(success:Bool)->(String)) {
             let result = handler(success: false)
             print("无法获取数据：\(result)")
         }
-    }
+    
 }
 
 //添加信息
@@ -68,23 +63,10 @@ func register(tel:String,password:String,confirmPassword:String,image:String,han
     searchTel(tel) { (success) -> (String) in
         if success {
             
-            return "添加失败"
+            let  result = handel(success: false)
+            return "\(result):添加失败"
         } else {
             
-            if password != confirmPassword {
-                
-                let result = handel(success: false)
-                print("\(result):两次密码不一致")
-            } else if tel.characters.count != 11 {
-                
-                let result = handel(success: false)
-                print("\(result):输入的电话号码格式不正确")
-            } else if password == "" {
-                
-                let result = handel(success: false)
-                print("\(result):密码不能为空")
-            }else {
-                
                 //2.添加信息
                 //2.1创建entity
                 let entity = NSEntityDescription.entityForName("Entity", inManagedObjectContext: managedContext)
@@ -105,7 +87,7 @@ func register(tel:String,password:String,confirmPassword:String,image:String,han
                     print("\(result)，error：\(error):保存信息失败")
                     
                 }
-            }
+            
             return "可以添加"
             
         }
@@ -119,20 +101,7 @@ func updatePass(tel:String,newPassword:String,confirmPassword:String,handler:(su
     searchTel(tel) { (success) -> (String) in
         if success {
             
-            var renew_temp :String
-            //判断更新的信息是否为空
-            if newPassword == ""{
-                
-                renew_temp = handler(success: false)
-                print("修改的密码不能为空 \(renew_temp)")
-            } else if newPassword != confirmPassword {
-                
-                renew_temp = handler(success: false)
-                print("两次密码不一致 \(renew_temp)")
-            } else {
-                print(entity.password)
                 entity.password = newPassword
-                print(entity.password)
                 //2.4保存信息
                 do {
                     
@@ -145,12 +114,12 @@ func updatePass(tel:String,newPassword:String,confirmPassword:String,handler:(su
                     print("\(result)，error：\(error):修改信息失败")
                     
                 }
-
-            }
             return "手机号正确"
         } else {
             
-            return "手机号不正确"
+            let  result = handler(success: false)
+            print("\(result),查找信息失败")
+            return "手机号未注册"
         }
     }
     

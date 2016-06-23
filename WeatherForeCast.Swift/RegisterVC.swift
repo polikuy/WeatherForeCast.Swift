@@ -34,32 +34,41 @@ class RegisterVC: UIViewController {
     
     @IBAction func registerBtn(sender: AnyObject) {
         
-        register(self.telTextF.text!, password: self.passwordTextF.text!, confirmPassword: self.passwordTwotextF.text!, image: "") { (success) -> (String) in
-            if success {
+        if  self.telTextF.text?.characters.count != 11 {
+            
+            self.telDetailL.text = "手机号格式不正确"
+            self.telDetailL.backgroundColor = UIColor.redColor()
+        } else if self.passwordTextF.text != self.passwordTwotextF.text {
+            
+            self.passwordDetail.text = "密码不一致"
+            self.passwordDetail.backgroundColor = UIColor.redColor()
+        } else {
+            
+            register(self.telTextF.text!, password: self.passwordTextF.text!, confirmPassword: self.passwordTwotextF.text!, image: "", handel: { (success) -> (String) in
                 
-                self.passwordDetail.backgroundColor = UIColor.clearColor()
-                self.passwordDetail.text = ""
-                self.telDetailL.text = ""
-                self.telDetailL.backgroundColor = UIColor.clearColor()
-                self.navigationController?.popViewControllerAnimated(true)
-                return ("对")
-            } else {
-                
-                if self.passwordTwotextF.text != self.passwordTextF.text! {
+                if success {
                     
-                    self.passwordDetail.backgroundColor = UIColor.redColor()
-                    self.passwordDetail.text = "两次密码输入不一致，请重新输入"
-                    self.passwordDetail.highlighted = true
+                    self.telDetailL.text = ""
+                    self.telDetailL.backgroundColor = UIColor.clearColor()
+                    self.passwordDetail.text = ""
+                    self.passwordDetail.backgroundColor = UIColor.clearColor()
+                    //跳转至登录界面
+                    self.navigationController?.popViewControllerAnimated(true)
+                    return "注册成功"
                 } else {
                     
+                    self.telDetailL.text = "已注册"
                     self.telDetailL.backgroundColor = UIColor.redColor()
-                    self.telDetailL.text = "手机号码格式不正确，请重新输入"
-                    self.telDetailL.highlighted = true
+                    return "注册失败"
                 }
-                return ("错")
-            }
+                
+            })
+            
         }
         
+        
+        
+               
     }
     
     @IBAction func cancelBtn(sender: AnyObject) {

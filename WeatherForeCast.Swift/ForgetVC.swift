@@ -31,26 +31,43 @@ class ForgetVC: UIViewController {
     
     //MARK:保存按钮
     @IBAction func saveBtn(sender: AnyObject) {
-        updatePass(self.telTextF.text!, newPassword: self.passwordtextF.text!, confirmPassword: self.passwordTwiceTextF.text!) { (success) -> (String) in
-            if success {
-                self.passwordTipL.backgroundColor = UIColor.clearColor()
-                self.passwordTipL.text = ""
-                self.telTipL.text = ""
-                self.telTipL.backgroundColor = UIColor.clearColor()
-                self.navigationController?.popViewControllerAnimated(true)
-                return "修改成功"
-            } else {
-                if self.passwordtextF.text != self.passwordTwiceTextF.text {
+        
+        if  self.telTextF.text?.characters.count != 11 {
+            
+            self.telTipL.text = "手机号格式不正确"
+            self.telTipL.backgroundColor = UIColor.redColor()
+        } else if self.passwordtextF.text != self.passwordTwiceTextF.text {
+            
+            self.passwordTipL.text = "密码不一致"
+            self.passwordTipL.backgroundColor = UIColor.redColor()
+        } else {
+            
+            updatePass(self.telTextF.text!, newPassword: self.passwordtextF.text!, confirmPassword: self.passwordTwiceTextF.text!) { (success) -> (String) in
+                if success {
                     
-                    self.passwordTipL.text = "两次输入密码不一致"
-                    self.passwordTipL.backgroundColor = UIColor.redColor()
-                } else if entity.tel != self.telTextF.text {
+                    if self.passwordtextF.text != self.passwordTwiceTextF.text {
+                        
+                        self.passwordTipL.text = "两次输入密码不一致"
+                        self.passwordTipL.backgroundColor = UIColor.redColor()
+                        return "修改失败"
+                    } else {
+                        
+                        self.passwordTipL.backgroundColor = UIColor.clearColor()
+                        self.passwordTipL.text = ""
+                        self.telTipL.text = ""
+                        self.telTipL.backgroundColor = UIColor.clearColor()
+                        self.navigationController?.popViewControllerAnimated(true)
+                        return "修改成功"
+                    }
                     
-                    self.telTipL.text = "两次输入密码不一致"
+                } else {
+                    
+                    self.telTipL.text = "还未注册"
                     self.telTipL.backgroundColor = UIColor.redColor()
+                    return "修改失败"
                 }
-                return "修改失败"
             }
+            
         }
         
     }

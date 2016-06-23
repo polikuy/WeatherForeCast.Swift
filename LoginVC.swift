@@ -38,39 +38,42 @@ class LoginVC: UIViewController {
     
     //MARK:登录按钮
     @IBAction func loginBtn(sender: AnyObject) {
-        loginIn(self.telTextF.text!, password: self.passwordTextF.text!) { (success) -> (String) in
-            if success {
+       
+        if  self.telTextF.text?.characters.count != 11 {
+            
+            self.telTipL.text = "手机号码格式不正确"
+            self.telTipL.backgroundColor = UIColor.redColor()
+        } else {
+            
+            loginIn(self.telTextF.text!, password: self.passwordTextF.text!, handler: { (success) -> (String) in
                 
-                self.telTipL.text = ""
-                self.passwordTipL.text = ""
-                self.telTipL.backgroundColor = UIColor.clearColor()
-                self.passwordTipL.backgroundColor = UIColor.clearColor()
-                self.loginState = 1
+                if success {
+                    
+                    if self.passwordTextF.text != entity.password {
+                        
+                        self.passwordTipL.text = "密码错误"
+                        self.passwordTipL.backgroundColor = UIColor.redColor()
+                        return "登录失败"
+                    } else {
+                        
+                    self.telTipL.text = ""
+                    self.telTipL.backgroundColor = UIColor.clearColor()
+                    self.passwordTipL.text = ""
+                    self.passwordTipL.backgroundColor = UIColor.clearColor()
+                    self.navigationController?.popViewControllerAnimated(true)
+                    return "登录成功"
+                    }
+                } else {
+                    
+                        self.telTipL.text = "还未注册"
+                        self.telTipL.backgroundColor = UIColor.redColor()
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("HomePageVC")
-                vc!.setValue(1, forKey: "loginstate")
-                self.navigationController?.popViewControllerAnimated(true)
-                return "登录成功"
-            } else {
-                
-                if self.telTextF.text == "" {
-                    
-                    self.telTipL.backgroundColor = UIColor.redColor()
-                    self.telTipL.text = "电话不正确，请重新输入"
-                    
-                } else if entity.tel != self.telTextF.text {
-                    
-                    self.telTipL.text = "电话未注册"
-                    self.telTipL.backgroundColor = UIColor.redColor()
-                } else if entity.password != self.passwordTextF.text {
-                    
-                    self.passwordTipL.text = "密码不正确，请重新输入"
-                    self.passwordTipL.backgroundColor = UIColor.redColor()
+                    return "登录失败"
                 }
-                
-                return "登录失败"
-            }
+            })
         }
+        
+        
         
     }
     
