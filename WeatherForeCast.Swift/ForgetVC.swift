@@ -9,27 +9,66 @@
 import UIKit
 
 class ForgetVC: UIViewController {
-
+    
+    @IBOutlet var codeL: UILabel!
+    @IBOutlet var safeCode: UITextField!
+    @IBOutlet var passwordTwiceTextF: UITextField!
+    @IBOutlet var passwordTipL: UILabel!
+    @IBOutlet var passwordtextF: UITextField!
+    @IBOutlet var telTextF: UITextField!
+    @IBOutlet var telTipL: UILabel!
+    @IBOutlet var headImageV: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title  = "重设密码"
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
     }
-    */
-
+    
+    //MARK:保存按钮
+    @IBAction func saveBtn(sender: AnyObject) {
+        updatePass(self.telTextF.text!, newPassword: self.passwordtextF.text!, confirmPassword: self.passwordTwiceTextF.text!) { (success) -> (String) in
+            if success {
+                self.passwordTipL.backgroundColor = UIColor.clearColor()
+                self.passwordTipL.text = ""
+                self.telTipL.text = ""
+                self.telTipL.backgroundColor = UIColor.clearColor()
+                self.navigationController?.popViewControllerAnimated(true)
+                return "修改成功"
+            } else {
+                if self.passwordtextF.text != self.passwordTwiceTextF.text {
+                    
+                    self.passwordTipL.text = "两次输入密码不一致"
+                    self.passwordTipL.backgroundColor = UIColor.redColor()
+                } else if entity.tel != self.telTextF.text {
+                    
+                    self.telTipL.text = "两次输入密码不一致"
+                    self.telTipL.backgroundColor = UIColor.redColor()
+                }
+                return "修改失败"
+            }
+        }
+        
+    }
+    
+    //MARK:取消按钮
+    @IBAction func cancelBtn(sender: AnyObject) {
+        
+        
+    }
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

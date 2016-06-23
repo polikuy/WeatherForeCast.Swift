@@ -21,6 +21,7 @@ class HomePageVC: UIViewController
     var searchBarText: String!
     var str_weatherSummary:String!
     var backImageStr :String!
+    var loginstate : Int = 0
     
     
     var max_marr :Array<String> = []
@@ -40,9 +41,16 @@ class HomePageVC: UIViewController
         backImageStr = "backGround"
         barBtnItem.image = UIImage.init(named: "night-clouds-moon-icon_128")
         self.pleaseWait()
-        weather("Beijing")
-        
-        
+//        weather("Beijing")
+        weather("Beijing", handler: { (success) -> (String) in
+            if success {
+                
+                return "对"
+            } else {
+                
+                return "错"
+            }
+        })
     }
     
     func interNet(noti:NSNotification){
@@ -58,12 +66,31 @@ class HomePageVC: UIViewController
         //移除通知
         NSNotificationCenter.defaultCenter().removeObserver(noti)
     }
-     //收藏按钮
+  
+    
+    //MARK:收藏按钮
     @IBAction func collectBtn(sender: AnyObject) {
         
+        print(loginstate)
+        //判断是否已登录，若登录则进行收藏，若没有登录则跳入登录界面
+        if  loginstate == 1 {
+            
+            weatherCollect(self.cityL.text!, handler: { (success) -> (String) in
+                if success {
+                    self.tip("收藏成功")
+                    return "收藏成功"
+                } else {
+                    self.tip("收藏失败")
+                    return "收藏失败"
+                }
+             })
+            
+        } else {
+            
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC")
         self.navigationController?.pushViewController(vc!, animated: true)
-
+        }
+        
     }
     
     //MARK:收藏列表按钮
@@ -71,7 +98,6 @@ class HomePageVC: UIViewController
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CollectListTBV")
         self.navigationController?.pushViewController(vc!, animated: true)
-        
         
     }
     
@@ -87,20 +113,37 @@ class HomePageVC: UIViewController
         } else if ((searchBar.text?.rangeOfString(" ")) != nil ){
             
             self.searchBarText = searchBar.text?.stringByReplacingOccurrencesOfString(" ", withString: "")
-            weather(searchBarText)
+            weather(searchBarText, handler: { (success) -> (String) in
+                if success {
+                    
+                    return "对"
+                } else {
+                    
+                    return "错"
+                }
+             })
             
         } else {
             //调用函数
             self.searchBarText = searchBar.text
             self.pleaseWait()
-            self.weather(self.searchBarText)
+            weather(searchBarText, handler: { (success) -> (String) in
+                if success {
+                    
+                    return "对"
+                } else {
+                    
+                    return "错"
+                }
+            })
             
         }
         
     }
     
+    
     //MARK:天气函数
-    func weather(searchBarText:String) -> Void {
+    func weather(searchBarText:String,handler:(success:Bool)->(String)) -> Void {
         
         var tempCity = searchBarText
         
@@ -132,6 +175,7 @@ class HomePageVC: UIViewController
                     
                     self.tip("输入城市名字有误，请重新输入")
                     self.clearAllNotice()
+                    handler(success: false)
                     
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
@@ -149,10 +193,12 @@ class HomePageVC: UIViewController
                         self.clearAllNotice()
                         
                     })
+                    handler(success: true)
                 }
             }
         }
         task.resume()
+        
     }
     
     //MARK:最高温度与最低温度
@@ -187,10 +233,13 @@ class HomePageVC: UIViewController
             
             //设置图片
             if  maxImageStr >= 30 && minImageStr > 20{
+                
                 self.maxImage.image = UIImage.init(named: "temperature-weather-ic_128")
             } else if maxImageStr < 30 && maxImageStr >= 10{
+                
                 self.maxImage.image = UIImage.init(named: "sun-smile-glasses-icon_128")
             } else {
+                
                 self.maxImage.image = UIImage.init(named: "snow-snowflakes-icon_128")
             }
             

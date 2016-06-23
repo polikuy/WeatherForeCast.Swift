@@ -12,6 +12,7 @@
 import Foundation
 import CoreData
 
+
 extension Entity {
 
     @NSManaged var tel: String?
