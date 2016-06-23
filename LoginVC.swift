@@ -39,7 +39,12 @@ class LoginVC: UIViewController {
     //MARK:登录按钮
     @IBAction func loginBtn(sender: AnyObject) {
        
-        if  self.telTextF.text?.characters.count != 11 {
+        //MARK：手机号码的正则匹配
+        let pattern = "1[3|5|7|8][0-9]\\d{8}"
+        let tel_temp = self.telTextF.text?.rangeOfString(pattern, options: NSStringCompareOptions.RegularExpressionSearch, range: nil, locale: nil)
+        print(tel_temp?.count)
+        
+        if  tel_temp?.count != 11 {
             
             self.telTipL.text = "手机号码格式不正确"
             self.telTipL.backgroundColor = UIColor.redColor()
